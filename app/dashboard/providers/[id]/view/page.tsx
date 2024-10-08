@@ -1,3 +1,4 @@
+"use client"
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import { getProviderById } from "@/app/api/provider";
 import { Button } from "@/components/ui/button";
@@ -6,15 +7,19 @@ import { Separator } from "@/components/ui/separator";
 import { User, Phone, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { DataTable } from "./data-table";
-import { fetchMachineryByProvider } from "@/app/api/machinery";
+import { fetchMachineryByProvider, Machinery } from "@/app/api/machinery";
 import { columns } from "./columns";
 import Link from "next/link";
+import { useState } from "react";
 
 export default async function Page({ params }: { params: { id: string } }) {
+
+  //  const[machineryData,setMachineryData] = useState<Machinery[]>([]);
   const id = params.id;
   const [provider] = await Promise.all([getProviderById(id)]);
 
   const data = await fetchMachineryByProvider(id);
+  // setMachineryData(data)
 
   return (
     <main>
@@ -71,7 +76,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
         <div className="container mx-auto py-10">
           
-          <DataTable columns={columns} data={data} />
+          <DataTable columns={columns} data={data ? data : []} />
         </div>
       </div>
     </main>

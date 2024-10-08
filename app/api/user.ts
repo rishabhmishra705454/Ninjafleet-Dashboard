@@ -22,18 +22,15 @@ interface FetchUsersResponse {
     };
   };
 }
+import { BASE_URL } from "./api";
 
 export const fetchUsers = async (page = 1, limit = 10, search = ''): Promise<FetchUsersResponse> => {
-  const response = await fetch(`http://localhost:3001/api/admin/users?page=${page}&limit=${limit}&search=${search}`);
-  if (!response.ok) {
-    throw new Error('Failed to fetch users');
-  }
+  const response = await fetch(`${BASE_URL}/api/admin/users?page=${page}&limit=${limit}&search=${search}`);
   return response.json();
 };
 
-export const deleteUser = async (id: number): Promise<void> => {
-  const response = await fetch(`http://localhost:3001/api/admin/users/${id}`, { method: 'DELETE' });
-  if (!response.ok) {
-    throw new Error('Failed to delete user');
-  }
+export const deleteUser = async (id: number): Promise<FetchUsersResponse> => {
+  const response = await fetch(`${BASE_URL}/api/admin/users/${id}`, { method: 'DELETE' });
+  
+  return response.json();
 };

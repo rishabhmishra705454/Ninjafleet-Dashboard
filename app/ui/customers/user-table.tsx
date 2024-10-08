@@ -17,15 +17,16 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Download, Trash } from "lucide-react";
+import { BASE_URL } from "@/app/api/api";
+import { toast } from "sonner"
 
-const BASE_URL =
-  "https://ninjafleet-gweyhfetapb5eugk.centralindia-01.azurewebsites.net/"; // Update this with your actual base URL
 
 export default function UserTable() {
   const [users, setUsers] = useState<User[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [message, setMessage] = useState("");
 
   const loadUsers = async (page: number, search: string) => {
     try {
@@ -33,6 +34,8 @@ export default function UserTable() {
       if (data.success) {
         setUsers(data.data.users);
         setTotalPages(data.data.meta.totalPages);
+      }else{
+        setMessage(data.message);
       }
     } catch (error) {
       console.error(error);
@@ -45,15 +48,19 @@ export default function UserTable() {
 
   const handleDelete = async (id: number) => {
     try {
-      await deleteUser(id);
+      const data = await deleteUser(id);
+      toast(data.message);
+      setUsers([])
       loadUsers(page, searchTerm); // Refetch users after deletion
+
+
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleDownload = (relativeUrl: string, filename: string) => {
-    const url = `${BASE_URL}${relativeUrl}`; // Prepend base URL to the relative URL
+    const url = `${BASE_URL}/${relativeUrl}`; // Prepend base URL to the relative URL
     const link = document.createElement("a");
     link.href = url;
     link.download = filename;
@@ -126,6 +133,8 @@ export default function UserTable() {
               ))}
             </TableBody>
           </Table>
+
+          <p className=" text-center m-4">{message}</p>
 
           {/* Pagination */}
           <div className="mt-4 flex justify-between">

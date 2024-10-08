@@ -1,0 +1,1 @@
+export const BASE_URL = "https://ninjafleet-gweyhfetapb5eugk.centralindia-01.azurewebsites.net";

@@ -14,6 +14,8 @@ export default   function ProviderTable() {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
+  const [message, setMessage] = useState("");
+  
 
   const loadProviders =  async (page: number, search: string) => {
     try {
@@ -21,6 +23,8 @@ export default   function ProviderTable() {
       if (response.success) {
         setProviders(response.data.providers);
         setTotalPages(response.data.meta.totalPages);
+      }else{
+        setMessage(response.message);
       }
     } catch (error) {
       console.error(error);
@@ -35,10 +39,11 @@ export default   function ProviderTable() {
     try {
       const response = await deleteProvider(id);
       if(response.success ===true){
+        setProviders([]);
         loadProviders(page, searchTerm);
-        toast.success("Provider deleted successfully",);
+        toast.success(response.message);
       }else{
-
+        toast.error(response.message);
       }
      
     } catch (error) {
@@ -100,7 +105,7 @@ export default   function ProviderTable() {
               ))}
             </TableBody>
         </Table>
-
+        <p className=" text-center m-4">{message}</p>
          {/* Pagination */}
          <div className="mt-4 flex justify-between">
             <Button onClick={() => setPage(page - 1)} disabled={page === 1}>

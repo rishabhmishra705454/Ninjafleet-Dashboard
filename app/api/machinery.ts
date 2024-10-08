@@ -1,3 +1,5 @@
+import { BASE_URL } from "./api";
+
 export type Machinery = {
   id: string;
   providerId: string;
@@ -28,7 +30,7 @@ export const fetchMachineryByProvider = async (
   providerId: string
 ): Promise<Machinery[]> => {
   const response = await fetch(
-    `http://localhost:3001/api/machinery/provider/${providerId}`
+    `${BASE_URL}/api/machinery/provider/${providerId}`
   );
 
   const data = await response.json();
@@ -38,7 +40,7 @@ export const fetchMachineryByProvider = async (
 
 
 export const getMachineryById = async ( machineryId: string): Promise<Machinery> =>{
-  const response = await fetch(`http://localhost:3001/api/machinery/${machineryId}`);
+  const response = await fetch(`${BASE_URL}/api/machinery/${machineryId}`);
   const data = await response.json();
   return data.data;
 }
@@ -86,7 +88,7 @@ export const addMachineryByProvider = async (
     console.log(pair[0] + ": " + pair[1]);
   }
 
-  const response = await fetch("http://localhost:3001/api/machinery", {
+  const response = await fetch(`${BASE_URL}/api/machinery`, {
     method: "POST",
     body: formData,
   });
