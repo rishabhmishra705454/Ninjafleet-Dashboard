@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@heroicons/react':
-        specifier: ^2.1.5
-        version: 2.1.5(react@19.0.0-rc-f38c22b244-20240704)
       '@hookform/resolvers':
         specifier: ^3.9.0
         version: 3.9.0(react-hook-form@7.53.0(react@19.0.0-rc-f38c22b244-20240704))
@@ -171,11 +168,6 @@ packages:
 
   '@googlemaps/markerclusterer@2.5.3':
     resolution: {integrity: sha512-x7lX0R5yYOoiNectr10wLgCBasNcXFHiADIBdmn7jQllF2B5ENQw5XtZK+hIw4xnV0Df0xhN4LN98XqA5jaiOw==}
-
-  '@heroicons/react@2.1.5':
-    resolution: {integrity: sha512-FuzFN+BsHa+7OxbvAERtgBTNeZpUjgM/MIizfVkSCL2/edriN0Hx/DWRCR//aPYwO5QX/YlgLGXk+E3PcfZwjA==}
-    peerDependencies:
-      react: '>= 16'
 
   '@hookform/resolvers@3.9.0':
     resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
@@ -1903,10 +1895,6 @@ snapshots:
     dependencies:
       fast-deep-equal: 3.1.3
       supercluster: 8.0.1
-
-  '@heroicons/react@2.1.5(react@19.0.0-rc-f38c22b244-20240704)':
-    dependencies:
-      react: 19.0.0-rc-f38c22b244-20240704
 
   '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@19.0.0-rc-f38c22b244-20240704))':
     dependencies:
