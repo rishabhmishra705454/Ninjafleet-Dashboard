@@ -25,7 +25,7 @@ export type Machinery = {
   machineryName: string;
   category: string;
   model?: string;
-  condition: "New" | "Used" | "Needs Maintenance";
+  condition: string;
   fuelType?: string;
   pricing: number;
   isActive: boolean;

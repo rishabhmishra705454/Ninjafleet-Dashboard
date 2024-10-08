@@ -4,9 +4,11 @@ import { TableRowSkeleton } from "@/app/ui/skeletons";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { fetchBookings, Booking } from "@/app/api/booking";
+import { Machinery } from "@/app/api/machinery";
 
 export default async function Page() {
-   const data = await fetchBookings(1,100);
+
+    const bookings: Booking[] = (await fetchBookings(1, 100)) || [];
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
@@ -16,7 +18,7 @@ export default async function Page() {
         <Suspense fallback={<TableRowSkeleton/>}>
         <div className="container mx-auto py-10">
            
-          <DataTable columns={columns} data={data ? data : []} /> 
+          <DataTable columns={columns} data={bookings ? bookings : []} /> 
           </div>
         </Suspense>
       </div>

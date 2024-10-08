@@ -1,4 +1,5 @@
 import { BASE_URL } from "./api";
+import { Machinery } from "./machinery";
 
 export interface Booking {
   id: number;
@@ -7,12 +8,12 @@ export interface Booking {
   providerId: number;
   landCoordinates: string;  // changed to lowercase "string"
   landArea: number;
-  startDate: number;
-  endDate: number;
-  status: number;
-  totalAmount: number;
-  createdAt: number;
-  updatedAt: number;
+  startDate: string;
+  endDate: string;
+  status: string;
+  totalAmount: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface FetchBookingResponse {
@@ -32,7 +33,7 @@ interface FetchBookingResponse {
 export const fetchBookings = async (
   page = 1,
   limit = 10
-): Promise<FetchBookingResponse | null> => {
+): Promise<Booking[] | null> => {
   try {
     const response = await fetch(
       `${BASE_URL}/api/bookings?page=${page}&limit=${limit}`

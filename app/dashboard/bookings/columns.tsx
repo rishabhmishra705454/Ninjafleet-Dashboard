@@ -10,7 +10,7 @@ export type Booking = {
   landArea: number
   startDate: string
   endDate: string
-  status: "Pending" | "Confirmed" | "Cancelled"
+  status: string
   totalAmount: string
   createdAt: string
   updatedAt: string
